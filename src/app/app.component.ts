@@ -11,12 +11,12 @@ import { Task } from 'src/models/task.model';
 export class AppComponent {
 
   public tasks: Task[] = [];
-  public title: string = "Olá Mundo";
-  public form!: FormGroup;
+  public title: string = "Olá mundo";
+  public form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      title: ['Write some task', Validators.compose([ //'placeholder', vetor de validações
+      title: ['', Validators.compose([ //'placeholder', array de validações
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(90)
