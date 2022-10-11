@@ -22,14 +22,16 @@ export class AppComponent {
         Validators.maxLength(90)
       ])]
     })
-
-    this.tasks.push(new Task(1,"Estudar JS", false));
-    this.tasks.push(new Task(2,"Estudar Angular", true));
-    this.tasks.push(new Task(3,"Construir portfólio", false));
   }
 
   changeMe(){
     this.title = "Titulo alterado ;)";
+  }
+
+  addTask() {
+    const title = this.form.controls['title'].value;
+    const id = this.tasks.length + 1;
+    this.tasks.push(new Task(id, title, false));
   }
 
   deleteTask(tasks: Task) {

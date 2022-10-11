@@ -33,7 +33,7 @@
         <form [formGroup]="form">
           <fieldset>
             <label>Task: </label>
-            <input type="text" placeholder="Write some task today =)" formControlName="title"><br>
+            <input type="text" placeholder="Write some task today =)" formControlName="title"><button [disabled]="form.invalid" (click)="addTask()">Submit</button><br>
             <small *ngIf="form.controls.title.invalid && !form.controls.title.pristine" >The task must have 3 characters to 90.</small>
           </fieldset>          
         </form>
