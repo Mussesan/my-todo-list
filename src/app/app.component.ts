@@ -22,6 +22,8 @@ export class AppComponent {
         Validators.maxLength(90)
       ])]
     })
+
+    this.loadTasks();
   }
 
   changeMe(){
@@ -36,6 +38,7 @@ export class AppComponent {
     const title = this.form.controls['title'].value;
     const id = this.tasks.length + 1;
     this.tasks.push(new Task(id, title, false));
+    this.saveLocalStorage();
     this.clear();
   }
 
@@ -44,14 +47,27 @@ export class AppComponent {
     if (index !== -1) {
       this.tasks.splice(index, 1) //aqui estamos removendo baseado no index que foi capturado no indexOf
     }
+    this.saveLocalStorage();
   }
 
   doneTask(tasks: Task){
     tasks.done = true;
+    this.saveLocalStorage();
   }
 
   undoneTask(tasks: Task){
     tasks.done = false;
+    this.saveLocalStorage();
   }
 
+  saveLocalStorage(){
+    const data = JSON.stringify(this.tasks); //Criando uma variável que recebe um JSON de string como valor.
+    localStorage.setItem('task', data); //Aqui usamos um método do JS que seta o item como parâmetro (chave, valor)
+  }
+
+  loadTasks(){
+    const data = localStorage.getItem('tasks');
+    this.tasks = JSON.parse(data);
+  }
+  
 }
