@@ -66,7 +66,7 @@ export class AppComponent {
   }
 
   loadTasks(){
-    const data = localStorage.getItem('tasks');
+    const data = localStorage.getItem('task');
     this.tasks = JSON.parse(data);
   }
   
