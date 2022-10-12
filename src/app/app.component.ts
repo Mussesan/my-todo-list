@@ -28,10 +28,15 @@ export class AppComponent {
     this.title = "Titulo alterado ;)";
   }
 
+  clear() {
+    this.form.reset();
+  }
+
   addTask() {
     const title = this.form.controls['title'].value;
     const id = this.tasks.length + 1;
     this.tasks.push(new Task(id, title, false));
+    this.clear();
   }
 
   deleteTask(tasks: Task) {

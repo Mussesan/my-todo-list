@@ -12,6 +12,7 @@
       <section>
         <h3>MY simple Tasks</h3>
       <ul>
+        <p><small *ngIf="tasks.length == 0">No tasks for now... </small></p>
         <li *ngFor="let task of tasks">{{task.index}} | {{task.title}} -
 
           <button *ngIf="!task.done" (click)="doneTask(task)">
