@@ -1,49 +1,62 @@
-<section>
-  <div>
-    <header>
-      <span>
-        <h1></h1>
-        <button (click)="changeMe()">Alterar Titulo</button>
-      </span>
-      
-    </header>
-
+<body>
+  <section>
     <div>
-      <section>
-        <h3>MY simple Tasks</h3>
-      <ul>
-        <p><small *ngIf="tasks.length == 0">No tasks for now... </small></p>
-        <li *ngFor="let task of tasks">{{task.index}} | {{task.title}} -
+      <header>
+        <span>
+          <h1 class="title animate__animated animate__zoomInDown">_My (dev) Tasks;</h1><br>
+        </span>
+        
+      </header>
+  
+      <div>
+        <section>
+          
+        <ul class="animate__animated animate__flipInX animate__fast" *ngIf="mode=='list'">
+          <p><small *ngIf="tasks.length == 0">No tasks for now... </small></p>
+          <li *ngFor="let task of tasks">{{task.title}}
+  
+            <button (click)="deleteTask(task)">
+              <i class="fa fa-trash"></i>
+              
+            </button> 
 
-          <button *ngIf="!task.done" (click)="doneTask(task)">
-            Done task
-          </button> | 
+            <button *ngIf="task.done" (click)="undoneTask(task)">
+              <i class="fa fa-refresh" title="Do again"></i>
+            </button>
 
-          <button (click)="deleteTask(task)">
-            Delete task
-          </button> 
+            <button *ngIf="!task.done" (click)="doneTask(task)">
+              <i class="fa fa-check-circle-o" title="Done this task"></i>
+            </button></li>
 
-          <button *ngIf="task.done" (click)="undoneTask(task)">
-            Do Again
-          </button></li>
-      </ul>
-      </section>
+        </ul>
+        </section>
+        
+        <div id="modal" *ngIf="mode=='add'" class="animate__animated animate__flipInX animate__faster">  
+          <h1>New Task</h1>
+          <form [formGroup]="form">
+            <input type="text" placeholder="Write some task" formControlName="title"> <br>
+            <small class="danger" *ngIf="form.controls.title.invalid && !form.controls.title.pristine" >Must have 3 characters to 90.</small>
+            <p class="text-center">
+              <button [disabled]="form.invalid" (click)="addTask()" class="button animate__fadeInUp animate__faster" (click)="changeMode('list')"><i class="fa fa-save"></i> Save</button><br>
+            </p>            
+          </form>  
+        </div>
+      </div>
+
       
-      <section>
+      <button class="button animate__animated animate__fadeInUp animate__faster" (click)="changeMode('add')" *ngIf="mode == 'list'">
+        <i class="fa fa-plus"></i>
+        Add Task
+      </button>
 
-        <form [formGroup]="form">
-          <fieldset>
-            <label>Task: </label>
-            <input type="text" placeholder="Write some task today =)" formControlName="title"><button [disabled]="form.invalid" (click)="addTask()">Submit</button><br>
-            <small *ngIf="form.controls.title.invalid && !form.controls.title.pristine" >The task must have 3 characters to 90.</small>
-          </fieldset>          
-        </form>
-
-      </section>
+      <button class="button animate__animated animate__fadeInUp animate__faster" (click)="changeMode('list')" *ngIf="mode == 'add'">
+        <i class="fa fa-times" style="margin-right: 15px;"></i>
+        Back
+      </button>
+  
+      <footer>
+  
+      </footer>
     </div>
-
-    <footer>
-
-    </footer>
-  </div>
-</section>
+  </section>
+</body>
