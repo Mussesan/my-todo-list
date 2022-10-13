@@ -21,7 +21,6 @@ body {
 
 ul {
     width: 100%;
-    min-width: 600px;
     text-align: left;
     margin: 10px 0px 20px 0px;
     padding: 10px;
@@ -94,8 +93,7 @@ button{
 }
 
 #modal {
-    width: auto;
-    min-width: 600px;
+    width: 100%;
     text-align: left;
     margin: 10px;
     padding: 10px;
